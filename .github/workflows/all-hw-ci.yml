@@ -8,11 +8,32 @@ on:
   workflow_dispatch:
     # Inputs the workflow accepts.
     inputs:
-      name:
+      binary:
         # Friendly description to be shown in the UI instead of 'name'
-        description: 'Person to greet'
+        description: 'Binary for the task'
         # Default value if no value is explicitly provided
-        default: 'World'
+        default: '/test/HelloW.axf'
+        # Input has to be provided for the workflow to run
+        required: true
+      input:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Input data for the task'
+        # Default value if no value is explicitly provided
+        default: '/test/input1.txt'
+        # Input has to be provided for the workflow to run
+        required: true
+      api_key:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'API key for the all-hw.com service'
+        # Default value if no value is explicitly provided
+        default: 'ba1e491b-331b-4e35-b799-f714b8505843'
+        # Input has to be provided for the workflow to run
+        required: true
+      timeout:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Task timeout'
+        # Default value if no value is explicitly provided
+        default: '60'
         # Input has to be provided for the workflow to run
         required: true
 
@@ -27,4 +48,5 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - name: Start task
-      run: echo "Hello ${{ github.event.inputs.name }}"
+      run: echo `curl --cacert ${{ github.action_path }}/test/ca.pem -X POST -F firmware=${{ github.action_path }}${{ github.event.inputs.binary }} -F input=${{ github.action_path }}${{ github.event.inputs.input }} https://cloud.all-hw.com/ci?timeout=${{ github.event.inputs.timeout }}&key=${{ github.event.inputs.api_key }}`
+
