@@ -53,11 +53,11 @@ jobs:
         INPUT_FILE: ${{ github.event.inputs.file }}
         INPUT_TIMEOUT: ${{ github.event.inputs.timeout }}
         INPUT_API_KEY: ${{ github.event.inputs.api_key }} 
-      run: echo "binary - $INPUT_BINARY"
+      run: echo "curl -X POST -F firmware=./$INPUT_BINARY -F input=./$INPUT_FILE https://cloud.all-hw.com/ci/usertask?timeout=$INPUT_TIMEOUT&key=$INPUT_API_KEY"
     - name: Start task
       env: 
         INPUT_BINARY: ${{ github.event.inputs.binary }}
         INPUT_FILE: ${{ github.event.inputs.file }}
         INPUT_TIMEOUT: ${{ github.event.inputs.timeout }}
         INPUT_API_KEY: ${{ github.event.inputs.api_key }} 
-      run: curl -X POST -F firmware=./$INPUT_BINARY -F input=./$INPUT_FILE https://cloud.all-hw.com/ci/usertask?timeout=$INPUT_TIMEOUT&key=$INPUT_API_KEY
+      run: curl -X POST -F firmware=./$INPUT_BINARY -F input=./$INPUT_FILE https://cloud.all-hw.com/ci/usertask?timeout=$INPUT_TIMEOUT&key=$INPUT_API_KEY 2>/dev/null
