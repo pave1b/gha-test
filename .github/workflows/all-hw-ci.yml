@@ -51,5 +51,5 @@ jobs:
         INPUT_BINARY: ${{ github.event.inputs.binary }}
         INPUT_FILE: ${{ github.event.inputs.file }}
         INPUT_TIMEOUT: ${{ github.event.inputs.timeout }}
-        INPUT_API_KEY: ${{ github.event.inputs.api_key }}
-      run: echo `${{ github.action_path }}/test/ci.sh task`
+        INPUT_API_KEY: ${{ github.event.inputs.api_key }}        
+      run: echo `./test/ci.sh task`
