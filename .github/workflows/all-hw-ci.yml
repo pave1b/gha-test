@@ -60,4 +60,4 @@ jobs:
         INPUT_FILE: ${{ github.event.inputs.file }}
         INPUT_TIMEOUT: ${{ github.event.inputs.timeout }}
         INPUT_API_KEY: ${{ github.event.inputs.api_key }} 
-      run: curl -X POST -F firmware=./$INPUT_BINARY -F input=./$INPUT_FILE https://cloud.all-hw.com/ci/usertask?timeout=$INPUT_TIMEOUT&key=$INPUT_API_KEY 2>/dev/null
+      run: chmod +x ./test/ci.sh; ./tes.ci.sh task
