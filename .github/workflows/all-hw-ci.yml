@@ -48,7 +48,6 @@ jobs:
     steps:
     - name: Check out repository
       uses: actions/checkout@main
-    - name: Start task
     - id: main
       env: 
         INPUT_BINARY: ${{ github.event.inputs.binary }}
