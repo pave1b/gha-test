@@ -12,14 +12,14 @@ on:
         # Friendly description to be shown in the UI instead of 'name'
         description: 'Binary for the task'
         # Default value if no value is explicitly provided
-        default: '/test/HelloW.axf'
+        default: 'test/HelloW.axf'
         # Input has to be provided for the workflow to run
         required: true
       file:
         # Friendly description to be shown in the UI instead of 'name'
         description: 'Input data for the task'
         # Default value if no value is explicitly provided
-        default: '/test/input1.txt'
+        default: 'test/input1.txt'
         # Input has to be provided for the workflow to run
         required: true
       api_key:
