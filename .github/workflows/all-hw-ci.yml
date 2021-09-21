@@ -47,7 +47,7 @@ jobs:
     steps:
     - name: Show env
       working-directory: test
-      run: ls -l
+      run: echo `ls -l`
 
     - name: Start task
       env: 
