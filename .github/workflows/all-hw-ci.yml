@@ -42,7 +42,7 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest    
     outputs:
-      result: ${{steps.main.result}}
+      result: ${{fromJson(steps.main.result)}}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -54,4 +54,4 @@ jobs:
         INPUT_FILE: ${{ github.event.inputs.file }}
         INPUT_TIMEOUT: ${{ github.event.inputs.timeout }}
         INPUT_API_KEY: ${{ github.event.inputs.api_key }} 
-      run: chmod +x ./test/ci.sh; echo ::set-output name=result::`./test/ci.sh`
+      run: chmod +x ./test/ci.sh; RESULT=`./test/ci.sh`; echo $RESULT; echo ::set-output name=result::$RESULT
