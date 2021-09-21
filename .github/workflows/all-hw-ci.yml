@@ -46,25 +46,11 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - name: Check out repository
-      uses: actions/checkout@v2
-    - name: Show env 1
-      env: 
-        INPUT_BINARY: ${{ github.event.inputs.binary }}
-        INPUT_FILE: ${{ github.event.inputs.file }}
-        INPUT_TIMEOUT: ${{ github.event.inputs.timeout }}
-        INPUT_API_KEY: ${{ github.event.inputs.api_key }} 
-      #working-directory: test
-      run: echo "Hello world - $INPUT_BINARY"
-
-    - name: Show env 2
-      #working-directory: test
-      run: echo `ls -l`
-
+      uses: actions/checkout@main
     - name: Start task
       env: 
         INPUT_BINARY: ${{ github.event.inputs.binary }}
         INPUT_FILE: ${{ github.event.inputs.file }}
         INPUT_TIMEOUT: ${{ github.event.inputs.timeout }}
         INPUT_API_KEY: ${{ github.event.inputs.api_key }} 
-      #working-directory: test
-      run: echo `./test/ci.sh task`
+      run: curl -X POST -F firmware=./$INPUT_BINARY -F input=./$INPUT_FILE https://cloud.all-hw.com/ci/usertask?timeout=$INPUT_TIMEOUT&key=$INPUT_API_KEY
