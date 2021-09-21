@@ -15,7 +15,7 @@ on:
         default: '/test/HelloW.axf'
         # Input has to be provided for the workflow to run
         required: true
-      input:
+      file:
         # Friendly description to be shown in the UI instead of 'name'
         description: 'Input data for the task'
         # Default value if no value is explicitly provided
@@ -39,7 +39,6 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "greet"
   run_task:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -48,5 +47,9 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - name: Start task
-      run: echo `curl -X POST -F firmware=$GITHUB_ACTION_PATH$INPUT_BINARY -F input=$GITHUB_ACTION_PATH$INPUT_INPUT https://cloud.all-hw.com/ci?timeout=$INPUT_TIMEOUT&key=$INPUT_API_KEY`
-
+      env: 
+        INPUT_BINARY: ${{ github.event.inputs.binary }}
+        INPUT_FILE: ${{ github.event.inputs.file }}
+        INPUT_TIMEOUT: ${{ github.event.inputs.timeout }}
+        INPUT_API_KEY: ${{ github.event.inputs.api_key }}
+      run: echo `${{ github.action_path }}/test/ci.sh task`
