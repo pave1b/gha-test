@@ -47,6 +47,13 @@ jobs:
     steps:
     - name: Check out repository
       uses: actions/checkout@main
+    - name: Test env
+      env: 
+        INPUT_BINARY: ${{ github.event.inputs.binary }}
+        INPUT_FILE: ${{ github.event.inputs.file }}
+        INPUT_TIMEOUT: ${{ github.event.inputs.timeout }}
+        INPUT_API_KEY: ${{ github.event.inputs.api_key }} 
+      run: echo "binary - $INPUT_BINARY"
     - name: Start task
       env: 
         INPUT_BINARY: ${{ github.event.inputs.binary }}
